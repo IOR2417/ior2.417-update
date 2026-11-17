@@ -1,6 +1,6 @@
 {
-  "version": "0.1.15",
-  "url": "https://github.com/IOR2417/ior2.417-update/releases/download/v0.1.15/ior2.417-setup.exe",
-  "notes": "首个带自动更新的版本：内置检查更新、赞赏码放大、存储上限修复、问AI记录清理、API模型提醒",
-  "publishedAt": "2026-09-24T12:04:54.472Z"
+  "version": "0.1.18",
+  "url": "https://github.com/IOR2417/ior2.417-update/releases/download/v0.1.18/ior2.417-Setup-0.1.18.exe",
+  "sha256": "74f49f79b76129262e9989dc2e10017b4cffa92650fd5389a6457cd0b93c2c16",
+  "notes": "修复批量下载卡住；默认模型改为 GPT Image 2.5 Medium；安全区审核包含头发并留舒适余量；WaveSpeed 首次安装免填；修复安装包自动更新。"
 }
