@@ -1,0 +1,49 @@
+name: Publish ior2.417 installer
+on:
+  push:
+    branches: [main]
+    paths: [release-upload.json]
+permissions:
+  contents: write
+concurrency:
+  group: ior-installer-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reassemble and verify installer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, json, os, urllib.request
+          m = json.load(open('release-upload.json', encoding='utf-8'))
+          os.makedirs('upload', exist_ok=True)
+          output = os.path.join('upload', m['filename'])
+          with open(output, 'wb') as dest:
+              for sha in m['chunks']:
+                  req = urllib.request.Request(
+                      'https://api.github.com/repos/IOR2417/ior2.417-update/git/blobs/' + sha,
+                      headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                               'Accept': 'application/vnd.github+json',
+                               'User-Agent': 'ior-release'})
+                  with urllib.request.urlopen(req, timeout=120) as response:
+                      blob = json.load(response)
+                  data = base64.b64decode(blob['content'])
+                  assert hashlib.sha1(('blob ' + str(len(data)) + '\0').encode() + data).hexdigest() == sha
+                  dest.write(data)
+          assert os.path.getsize(output) == m['size']
+          with open(output, 'rb') as source:
+              assert hashlib.file_digest(source, 'sha256').hexdigest() == m['sha256']
+          with open('release-notes.txt', 'w', encoding='utf-8') as notes:
+              notes.write(m['notes'])
+          PY
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(python3 -c 'import json; print("v" + json.load(open("release-upload.json"))["version"])')
+          asset=$(python3 -c 'import json; print(json.load(open("release-upload.json"))["filename"])')
+          gh release create "$tag" "upload/$asset" --target "$GITHUB_SHA" --title "$tag" --notes-file release-notes.txt
