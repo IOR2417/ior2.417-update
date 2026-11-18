@@ -1,6 +1,6 @@
 {
-  "version": "0.1.18",
-  "url": "https://github.com/IOR2417/ior2.417-update/releases/download/v0.1.18/ior2.417-Setup-0.1.18.exe",
-  "sha256": "74f49f79b76129262e9989dc2e10017b4cffa92650fd5389a6457cd0b93c2c16",
-  "notes": "修复批量下载卡住；默认模型改为 GPT Image 2.5 Medium；安全区审核包含头发并留舒适余量；WaveSpeed 首次安装免填；修复安装包自动更新。"
+  "version": "0.1.20",
+  "url": "https://github.com/IOR2417/ior2.417-update/releases/download/v0.1.20/ior2.417-Setup-0.1.20.exe",
+  "sha256": "d8105262b0afead1cb0f3724f7078e8c24c7641bd3fabd606f0bf40971c4c074",
+  "notes": "修复安全区误判与强制拦截；每次点击只生成一次；精简绿幕补全提示词；最终导出保留完整画面。"
 }
