@@ -1,6 +1,6 @@
 {
-  "version": "0.1.20",
-  "url": "https://github.com/IOR2417/ior2.417-update/releases/download/v0.1.20/ior2.417-Setup-0.1.20.exe",
-  "sha256": "d8105262b0afead1cb0f3724f7078e8c24c7641bd3fabd606f0bf40971c4c074",
-  "notes": "修复安全区误判与强制拦截；每次点击只生成一次；精简绿幕补全提示词；最终导出保留完整画面。"
+  "version": "0.1.22",
+  "url": "https://github.com/IOR2417/ior2.417-update/releases/download/v0.1.22/ior2.417-Setup-0.1.22.exe",
+  "sha256": "92de866ddb33ec490efb90629b4059490a6b5b512f584c5c8194c3f2f92a3940",
+  "notes": "新增 Qwen 2.1 无痕扩图与扩图比例；生成结果可作为下一轮底图；修复切换底图后显示绿幕预览；支持拖入及粘贴图片。"
 }
